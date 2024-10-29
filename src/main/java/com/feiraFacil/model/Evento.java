@@ -21,6 +21,6 @@ public class Evento {
     private LocalDate data;
 
     @ManyToOne
-    @JoinColumn(name = "feira_id")
+    @JoinColumn(name = "feira_id", nullable = false)
     private Feira feira;
 }

@@ -24,9 +24,19 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/admins").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/v3/**", "/swagger-ui/**", "/api/categorias/**", "/api/feiras/**", "/api/feirante/**", "/api/imagens/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/feiras/feira/*/admins/**").authenticated()
+
+                        .requestMatchers(HttpMethod.POST, "/api/admins", "/api/auth/login").permitAll()
+
+                        .requestMatchers(HttpMethod.GET,
+                                "/v3/**",
+                                "/swagger-ui/**",
+                                "/api/categorias/**",
+                                "/api/feiras/**",
+                                "/api/feirante/**",
+                                "/api/imagens/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

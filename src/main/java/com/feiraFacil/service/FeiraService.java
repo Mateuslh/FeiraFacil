@@ -2,8 +2,10 @@ package com.feiraFacil.service;
 
 import com.feiraFacil.exception.EntidadeNaoEncontradaException;
 import com.feiraFacil.model.Admin;
+import com.feiraFacil.model.Evento;
 import com.feiraFacil.model.Feira;
 import com.feiraFacil.repository.AdminRepository;
+import com.feiraFacil.repository.EventoRepository;
 import com.feiraFacil.repository.FeiraRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class FeiraService {
     private AdminRepository adminRepository;
     @Autowired
     private ImagemService imagemService;
+    @Autowired
+    private EventoRepository eventoRepository;
 
     public Feira findById(Long id) {
         return feiraRepository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException(Feira.class));
@@ -71,5 +75,30 @@ public class FeiraService {
         feira.getAdmins().remove(admin);
         feiraRepository.save(feira);
     }
+
+    public Page<Evento> findEventosByFeiraId(Long feiraId, Pageable pageable) {
+        Feira feira = feiraRepository.findById(feiraId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(Feira.class));
+        return new PageImpl<>(feira.getEventos(), pageable, feira.getAdmins().size());
+    }
+
+    public void addEventoToFeira(Long feiraId, Long eventoId) {
+        Feira feira = feiraRepository.findById(feiraId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(Feira.class));
+        Evento evento = eventoRepository.findById(eventoId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(Admin.class));
+        feira.getEventos().remove(evento);
+        feiraRepository.save(feira);
+    }
+
+    public void removeEventoFromFeira(Long feiraId, Long eventoId) {
+        Feira feira = feiraRepository.findById(feiraId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(Feira.class));
+        Evento evento = eventoRepository.findById(eventoId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(Admin.class));
+        feira.getEventos().remove(evento);
+        feiraRepository.save(feira);
+    }
+
 }
 

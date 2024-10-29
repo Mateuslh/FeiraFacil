@@ -41,11 +41,6 @@ public class FeiranteService {
         feiranteRepository.delete(findById(id));
     }
 
-//    public Feirante update(FeiranteBaseDTO feiranteBaseDTO){
-//        findById(feiranteBaseDTO.getId());
-//        feirante
-//    }
-
     public Feirante toFeirante(FeiranteRequestDTO feiranteRequestDTO) {
         Feirante feirante = new Feirante();
         feirante.setNomeFeirante(feiranteRequestDTO.getNomeFeirante());

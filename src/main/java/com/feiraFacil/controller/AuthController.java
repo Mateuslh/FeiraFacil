@@ -1,7 +1,7 @@
 package com.feiraFacil.controller;
 
 import com.feiraFacil.dto.ResponseEntityDto;
-import com.feiraFacil.dto.responseEntity.TokenResponseDTO;
+import com.feiraFacil.dto.baseEntity.TokenResponseDTO;
 import com.feiraFacil.security.AuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

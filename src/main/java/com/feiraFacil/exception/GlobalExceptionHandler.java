@@ -69,6 +69,11 @@ public class GlobalExceptionHandler {
         return handleExceptionResponse(ex, request, message);
     }
 
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<?> handleException(EntidadeNaoEncontradaException ex, WebRequest request) {
+        return handleExceptionResponse(ex, request, ex.getMessage());
+    }
+
     private ResponseEntity<?> handleExceptionResponse(Exception ex, WebRequest request, String message) {
         HandlerMethod handlerMethod = (HandlerMethod) request.getAttribute("org.springframework.web.servlet.HandlerMapping.bestMatchingHandler", 0);
 

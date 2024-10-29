@@ -42,6 +42,9 @@ public class Feira {
     )
     private List<Admin> admins;
 
+    @OneToMany(mappedBy = "feira", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Evento> eventos;
+
     @JsonProperty("imagemId")
     public Long getImagemId() {
         return imagem != null ? imagem.getId() : null;
