@@ -15,6 +15,9 @@ public class EventoBaseDTO extends AbstractDTO<Evento, EventoBaseDTO> {
     private LocalDate data;
     private Feira feira;
 
+    public EventoBaseDTO() {
+    }
+
     public EventoBaseDTO(Evento evento) {
         super(evento);
     }

@@ -15,6 +15,9 @@ public class AdminResponseDTO extends AbstractDTO<Admin, AdminResponseDTO> {
     private String cpf;
     private String usuario;
 
+    public AdminResponseDTO() {
+    }
+
     public AdminResponseDTO(Admin admin) {
         super(admin);
     }

@@ -10,6 +10,9 @@ import lombok.Setter;
 public class CategoriaRequestDTO extends AbstractDTO<Categoria, CategoriaRequestDTO> {
     private String descricao;
 
+    public CategoriaRequestDTO() {
+    }
+
     public CategoriaRequestDTO(Categoria categoria) {
         super(categoria);
     }

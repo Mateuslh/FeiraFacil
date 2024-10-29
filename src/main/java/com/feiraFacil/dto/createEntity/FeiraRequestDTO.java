@@ -20,6 +20,9 @@ public class FeiraRequestDTO extends AbstractDTO<Feira, FeiraRequestDTO> {
     @JsonProperty("imagemId")
     private Imagem imagem;
 
+    public FeiraRequestDTO() {
+    }
+
     public FeiraRequestDTO(Feira feira) {
         super(feira);
     }

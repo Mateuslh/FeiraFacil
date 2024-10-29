@@ -11,6 +11,9 @@ public class CategoriaBaseDTO extends AbstractDTO<Categoria, CategoriaBaseDTO> {
     private long id;
     private String descricao;
 
+    public CategoriaBaseDTO() {
+    }
+
     public CategoriaBaseDTO(Categoria categoria) {
         super(categoria);
     }

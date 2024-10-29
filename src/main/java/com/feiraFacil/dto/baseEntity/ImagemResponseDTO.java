@@ -10,6 +10,9 @@ import lombok.Setter;
 public class ImagemResponseDTO extends AbstractDTO<Imagem, ImagemResponseDTO> {
     private Long id;
 
+    public ImagemResponseDTO() {
+    }
+
     public ImagemResponseDTO(Imagem imagem) {
         super(imagem);
     }

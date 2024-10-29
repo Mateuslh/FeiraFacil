@@ -17,6 +17,9 @@ public class FeiranteBaseDTO extends AbstractDTO<Feirante, FeiranteBaseDTO> {
     private String email;
     private Long feiraId;
 
+    public FeiranteBaseDTO() {
+    }
+
     public FeiranteBaseDTO(Feirante feirante) {
         super(feirante);
     }

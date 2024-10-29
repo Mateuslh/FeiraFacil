@@ -17,6 +17,9 @@ public class FeiraBaseDTO extends AbstractDTO<Feira, FeiraBaseDTO> {
     private String descricao;
     private Long imagemId;
 
+    public FeiraBaseDTO() {
+    }
+
     public FeiraBaseDTO(Feira feira) {
         super(feira);
     }
