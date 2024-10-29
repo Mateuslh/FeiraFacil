@@ -40,8 +40,8 @@ public class Feirante {
     @JsonProperty("imagemId")
     private Imagem imagem;
 
-    @Email
-    @NotBlank(message = "O email não pode estar em branco.")
+    @Email(message = "{email.invalid}")
+    @NotBlank(message = "{email.blank}")
     @Column(unique = true, nullable = false)
     private String email;
 

@@ -1,7 +1,6 @@
-package com.feiraFacil.services;
+package com.feiraFacil.service;
 
-import com.feiraFacil.dto.FeiranteDTO;
-import com.feiraFacil.dto.createEntity.FeiranteCreateDTO;
+import com.feiraFacil.dto.createEntity.FeiranteRequestDTO;
 import com.feiraFacil.exception.EntidadeNaoEncontradaException;
 import com.feiraFacil.model.Feirante;
 import com.feiraFacil.model.Imagem;
@@ -29,8 +28,8 @@ public class FeiranteService {
         return feiranteRepository.save(feirante);
     }
 
-    public Feirante save(FeiranteCreateDTO feiranteCreateDTO) {
-        Feirante feirante = toFeirante(feiranteCreateDTO);
+    public Feirante save(FeiranteRequestDTO feiranteRequestDTO) {
+        Feirante feirante = toFeirante(feiranteRequestDTO);
         return save(feirante);
     }
 
@@ -38,20 +37,24 @@ public class FeiranteService {
         return feiranteRepository.findAll(pageable);
     }
 
-    public Feirante toFeirante(FeiranteCreateDTO feiranteCreateDTO) {
-        Feirante feirante = new Feirante();
-        feirante.setNomeFeirante(feiranteCreateDTO.nomeFeirante());
-        feirante.setNomeEmpresa(feiranteCreateDTO.nomeEmpresa());
-        feirante.setCnpj(feiranteCreateDTO.cnpj());
-        feirante.setEmail(feiranteCreateDTO.email());
-        feirante.setTelefone(feiranteCreateDTO.telefone());
-        Imagem imagem = imagemService.findById(feiranteCreateDTO.feiraId());
-        feirante.setImagem(imagem);
-        return feirante;
+    public void deleteById(Long id) {
+        feiranteRepository.delete(findById(id));
     }
 
-    public FeiranteDTO toFeiranteDTO(Feirante feirante) {
-        FeiranteDTO feiranteDTO = new FeiranteDTO(feirante.getId(), feirante.getNomeFeirante(), feirante.getCnpj(), feirante.getTelefone(), feirante.getCategorias(), feirante.getImagemId(), feirante.getEmail(), feirante.getFeira().getId());
-        return feiranteDTO;
+//    public Feirante update(FeiranteBaseDTO feiranteBaseDTO){
+//        findById(feiranteBaseDTO.getId());
+//        feirante
+//    }
+
+    public Feirante toFeirante(FeiranteRequestDTO feiranteRequestDTO) {
+        Feirante feirante = new Feirante();
+        feirante.setNomeFeirante(feiranteRequestDTO.getNomeFeirante());
+        feirante.setNomeEmpresa(feiranteRequestDTO.getNomeEmpresa());
+        feirante.setCnpj(feiranteRequestDTO.getCnpj());
+        feirante.setEmail(feiranteRequestDTO.getEmail());
+        feirante.setTelefone(feiranteRequestDTO.getTelefone());
+        Imagem imagem = imagemService.findById(feiranteRequestDTO.getFeiraId());
+        feirante.setImagem(imagem);
+        return feirante;
     }
 }

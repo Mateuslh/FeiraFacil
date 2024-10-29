@@ -31,9 +31,9 @@ public class Admin implements UserDetails {
     @NotBlank
     private String nome;
 
-    @NotBlank(message = "O e-mail não pode estar em branco")
+    @NotBlank(message = "{email.blank}")
     @Column(nullable = false, unique = true)
-    @Email(message = "Email não é valido.")
+    @Email(message = "{email.invalid}")
     private String email;
 
     @CPF

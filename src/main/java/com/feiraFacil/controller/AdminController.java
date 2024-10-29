@@ -1,15 +1,14 @@
 package com.feiraFacil.controller;
 
-import com.feiraFacil.dto.createEntity.AdminCreateDTO;
+import com.feiraFacil.dto.ResponseEntityDto;
+import com.feiraFacil.dto.baseEntity.AdminResponseDTO;
+import com.feiraFacil.dto.createEntity.AdminRequestDTO;
 import com.feiraFacil.model.Admin;
-import com.feiraFacil.services.AdminService;
+import com.feiraFacil.service.AdminService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admins")
@@ -20,9 +19,15 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody AdminCreateDTO adminDTO) {
-        Admin admin = adminService.toAdmin(adminDTO);
+    public ResponseEntity<Admin> createEntity(@RequestBody AdminRequestDTO adminDTO) {
+        Admin admin = adminDTO.toEntity();
         adminService.save(admin);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/admin")
+    public ResponseEntityDto<AdminResponseDTO> updateEntity(@RequestBody AdminRequestDTO adminDTO) {
+        Admin admin = adminDTO.toEntity();
+        return new ResponseEntityDto<>().setContent(adminService.save(admin));
     }
 }

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  feira_facil-app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx512m
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://feira_facil-db:5432/feira_facil_db
+      - SPRING_DATASOURCE_USERNAME=feira_user
+      - SPRING_DATASOURCE_PASSWORD=feira_password
+    networks:
+      - encurtador-net
+    depends_on:
+      - feira_facil-db
+    restart: unless-stopped
+
+  feira_facil-db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=feira_facil_db
+      - POSTGRES_USER=feira_user
+      - POSTGRES_PASSWORD=feira_password
+    ports:
+      - "5433:5432"
+    networks:
+      - encurtador-net
+    restart: unless-stopped
+
+networks:
+  encurtador-net:
+    driver: bridge

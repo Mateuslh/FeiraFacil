@@ -1,4 +1,4 @@
-package com.feiraFacil.services;
+package com.feiraFacil.service;
 
 import com.feiraFacil.exception.EntidadeNaoEncontradaException;
 import com.feiraFacil.model.Imagem;
@@ -39,6 +39,11 @@ public class ImagemService {
 
     public Imagem findById(Long id) {
         return imagemRepository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException(Imagem.class));
+    }
+
+    public void excluir(Long id) {
+        findById(id);
+        imagemRepository.deleteById(id);
     }
 }
 

@@ -1,6 +1,5 @@
-package com.feiraFacil.services;
+package com.feiraFacil.service;
 
-import com.feiraFacil.dto.createEntity.CategoriaCreateDTO;
 import com.feiraFacil.exception.EntidadeNaoEncontradaException;
 import com.feiraFacil.model.Categoria;
 import com.feiraFacil.repository.CategoriaRepository;
@@ -25,7 +24,7 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria categoria) {
-        if (findById(categoria.getId()) == null) throw new EntidadeNaoEncontradaException(Categoria.class);
+        findById(categoria.getId());
         return categoriaRepository.save(categoria);
     }
 
@@ -33,8 +32,9 @@ public class CategoriaService {
         return categoriaRepository.findAll(pageable);
     }
 
-    public Categoria toCategoria(CategoriaCreateDTO categoriaCreateDTO) {
-        return new Categoria(categoriaCreateDTO.descricao());
+    public void delete(Long id) {
+        Categoria categoria = findById(id);
+        categoriaRepository.delete(categoria);
     }
 
 }

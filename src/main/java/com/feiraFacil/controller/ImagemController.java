@@ -1,9 +1,9 @@
 package com.feiraFacil.controller;
 
 import com.feiraFacil.dto.ResponseEntityDto;
-import com.feiraFacil.dto.ImagemDTO;
+import com.feiraFacil.dto.baseEntity.ImagemResponseDTO;
 import com.feiraFacil.model.Imagem;
-import com.feiraFacil.services.ImagemService;
+import com.feiraFacil.service.ImagemService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,9 +22,9 @@ public class ImagemController {
     private ImagemService imagemService;
 
     @PostMapping("/upload")
-    public ResponseEntityDto<ImagemDTO> uploadImagem(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntityDto<ImagemResponseDTO> uploadImagem(@RequestParam("file") MultipartFile file) throws IOException {
         Imagem imagem = imagemService.salvarImagem(file);
-        return new ResponseEntityDto<>(true, "Sucesso", new ImagemDTO(imagem.getId()));
+        return new ResponseEntityDto<>().setContent(new ImagemResponseDTO(imagem));
 
     }
 
@@ -35,5 +35,11 @@ public class ImagemController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(imagem.getTipo()))
                 .body(imagem.getDados());
+    }
+
+    @DeleteMapping("/imagem/{id}")
+    public ResponseEntityDto<Void> delete(@PathVariable Long id) {
+        imagemService.excluir(id);
+        return new ResponseEntityDto<>();
     }
 }

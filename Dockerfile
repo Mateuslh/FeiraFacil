@@ -1,14 +1,17 @@
-# Usar uma imagem base do JDK 17
-FROM openjdk:17-jdk-alpine
-
-# Definir o diretório de trabalho
+FROM maven:3.8.4-openjdk-17 AS build
 WORKDIR /app
 
-# Copiar o arquivo JAR da aplicação para o contêiner
-COPY target/FeiraFacil-0.0.1-SNAPSHOT.jar /app/sua-aplicacao.jar
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
 
-# Expor a porta que sua aplicação irá rodar
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+FROM openjdk:17-jdk-slim AS run
+WORKDIR /app
+
+COPY --from=build /app/target/FeiraFacil-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
 
-# Comando para executar a aplicação
-ENTRYPOINT ["java", "-jar", "/app/sua-aplicacao.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

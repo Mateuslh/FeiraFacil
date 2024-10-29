@@ -1,6 +1,5 @@
-package com.feiraFacil.services;
+package com.feiraFacil.service;
 
-import com.feiraFacil.model.Admin;
 import com.feiraFacil.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +15,7 @@ public class AdminUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Admin admin = adminRepository.findByUsuario(username)
+        return adminRepository.findByUsuario(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
-        return admin;
     }
 }

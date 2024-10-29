@@ -1,8 +1,6 @@
 package com.feiraFacil.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
 
@@ -10,8 +8,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class PaginatedResponseDto<T> {
     private boolean success;
     private String message;

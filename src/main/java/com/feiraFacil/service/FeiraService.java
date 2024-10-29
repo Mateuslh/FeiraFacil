@@ -1,6 +1,6 @@
-package com.feiraFacil.services;
+package com.feiraFacil.service;
 
-import com.feiraFacil.dto.createEntity.FeiraCreateDTO;
+import com.feiraFacil.dto.createEntity.FeiraRequestDTO;
 import com.feiraFacil.exception.EntidadeNaoEncontradaException;
 import com.feiraFacil.model.Feira;
 import com.feiraFacil.repository.FeiraRepository;
@@ -29,14 +29,20 @@ public class FeiraService {
         return feiraRepository.findAll(pageable);
     }
 
-    public Feira save(FeiraCreateDTO feiraCreateDTO) {
-        Feira feira = new Feira();
-        feira.setData(feiraCreateDTO.data());
-        feira.setDescricao(feiraCreateDTO.descricao());
-        feira.setNome(feiraCreateDTO.nome());
-        feira.setImagem(imagemService.findById(feiraCreateDTO.imagemId()));
-        feira.setLocal(feiraCreateDTO.local());
-        return feiraRepository.save(feira);
+    public Feira update(FeiraRequestDTO feiraRequestDTO, Long id) {
+        Feira feira = findById(id);
+        //feiraMapper.updateEntityFromDto(feiraRequestDTO, feira);
+        return save(feira);
+    }
+
+    public Feira update(Feira feira) {
+        findById(feira.getId());
+        return save(feira);
+    }
+
+    public void delete(Long id) {
+        Feira feira = findById(id);
+        feiraRepository.delete(feira);
     }
 }
 

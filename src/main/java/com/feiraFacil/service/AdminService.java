@@ -1,6 +1,6 @@
-package com.feiraFacil.services;
+package com.feiraFacil.service;
 
-import com.feiraFacil.dto.createEntity.AdminCreateDTO;
+import com.feiraFacil.dto.baseEntity.AdminResponseDTO;
 import com.feiraFacil.exception.EntidadeNaoEncontradaException;
 import com.feiraFacil.model.Admin;
 import com.feiraFacil.repository.AdminRepository;
@@ -28,9 +28,9 @@ public class AdminService {
         return adminRepository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException(Admin.class));
     }
 
-    public Admin save(Admin admin) {
+    public AdminResponseDTO save(Admin admin) {
         admin.setSenha(passwordEncoder.encode(admin.getSenha()));
-        return adminRepository.save(admin);
+        return toAdminResponseDTO(adminRepository.save(admin));
     }
 
     public void deleteById(Long id) {
@@ -42,13 +42,7 @@ public class AdminService {
         adminRepository.delete(admin);
     }
 
-    public Admin toAdmin(AdminCreateDTO adminCreateDTO) {
-        Admin admin = new Admin();
-        admin.setUsuario(adminCreateDTO.usuario());
-        admin.setSenha(adminCreateDTO.senha());
-        admin.setNome(adminCreateDTO.nome());
-        admin.setEmail(adminCreateDTO.email());
-        admin.setCpf(adminCreateDTO.cpf());
-        return admin;
+    public AdminResponseDTO toAdminResponseDTO(Admin admin) {
+        return new AdminResponseDTO(admin);
     }
 }
