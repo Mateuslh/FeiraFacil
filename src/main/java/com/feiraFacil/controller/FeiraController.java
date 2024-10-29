@@ -2,8 +2,10 @@ package com.feiraFacil.controller;
 
 import com.feiraFacil.dto.PaginatedResponseDto;
 import com.feiraFacil.dto.ResponseEntityDto;
+import com.feiraFacil.dto.baseEntity.AdminResponseDTO;
 import com.feiraFacil.dto.baseEntity.FeiraBaseDTO;
 import com.feiraFacil.dto.createEntity.FeiraRequestDTO;
+import com.feiraFacil.model.Admin;
 import com.feiraFacil.model.Feira;
 import com.feiraFacil.service.FeiraService;
 import com.feiraFacil.utils.PageMapperUtil;
@@ -54,6 +56,25 @@ public class FeiraController {
     @DeleteMapping("feira/{id}")
     public ResponseEntityDto<Void> deleteEntity(@PathVariable Long id) {
         feiraService.delete(id);
+        return new ResponseEntityDto<>();
+    }
+
+    @GetMapping("feira/{feiraId}/admins")
+    public PaginatedResponseDto<AdminResponseDTO> getAdminsByFeira(@PathVariable Long feiraId, Pageable pageable) {
+        Page<Admin> adminsPage = feiraService.findAdminsByFeiraId(feiraId, pageable);
+        Page<AdminResponseDTO> adminResponseDTOs = PageMapperUtil.toPageDTO(adminsPage, AdminResponseDTO.class);
+        return new PaginatedResponseDto<AdminResponseDTO>().fromPage(adminResponseDTOs);
+    }
+
+    @PostMapping("feira/{feiraId}/admins/{adminId}")
+    public ResponseEntityDto<Void> addAdminToFeira(@PathVariable Long feiraId, @PathVariable Long adminId) {
+        feiraService.addAdminToFeira(feiraId, adminId);
+        return new ResponseEntityDto<>();
+    }
+
+    @DeleteMapping("feira/{feiraId}/admins/{adminId}")
+    public ResponseEntityDto<Void> removeAdminFromFeira(@PathVariable Long feiraId, @PathVariable Long adminId) {
+        feiraService.removeAdminFromFeira(feiraId, adminId);
         return new ResponseEntityDto<>();
     }
 }
