@@ -12,6 +12,7 @@ import com.feiraFacil.model.Feira;
 import com.feiraFacil.service.FeiraService;
 import com.feiraFacil.utils.PageMapperUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +26,7 @@ public class FeiraController {
     FeiraService feiraService;
 
     @Tag(name = "Feira")
+    @Transactional
     @GetMapping("feira/{id}")
     public ResponseEntityDto<FeiraBaseDTO> getEntityById(@PathVariable Long id) {
         Feira feira = feiraService.findById(id);
@@ -33,6 +35,7 @@ public class FeiraController {
     }
 
     @Tag(name = "Feira")
+    @Transactional
     @GetMapping
     public PaginatedResponseDto<FeiraBaseDTO> getEntity(Pageable pageable) {
         Page<Feira> feiras = feiraService.findAll(pageable);
@@ -41,6 +44,7 @@ public class FeiraController {
     }
 
     @Tag(name = "Feira")
+    @Transactional
     @PostMapping
     public ResponseEntityDto<FeiraBaseDTO> createEntity(@RequestBody FeiraRequestDTO feiraRequestDTO) {
         Feira feira = feiraRequestDTO.toEntity();
@@ -50,6 +54,7 @@ public class FeiraController {
     }
 
     @Tag(name = "Feira")
+    @Transactional
     @PutMapping("feira")
     public ResponseEntityDto<FeiraBaseDTO> updateEntity(@RequestBody FeiraBaseDTO feiraBaseDTO) {
         Feira feira = feiraBaseDTO.toEntity();
@@ -59,13 +64,15 @@ public class FeiraController {
     }
 
     @Tag(name = "Feira")
+    @Transactional
     @DeleteMapping("feira/{id}")
     public ResponseEntityDto<Void> deleteEntity(@PathVariable Long id) {
         feiraService.delete(id);
         return new ResponseEntityDto<>();
     }
 
-    @Tag(name = "Feira - Admin")
+    @Tag(name = "FeiraAdmin")
+    @Transactional
     @GetMapping("feira/{feiraId}/admins")
     public PaginatedResponseDto<AdminResponseDTO> getAdminsByFeira(@PathVariable Long feiraId, Pageable pageable) {
         Page<Admin> adminsPage = feiraService.findAdminsByFeiraId(feiraId, pageable);
@@ -73,21 +80,24 @@ public class FeiraController {
         return new PaginatedResponseDto<AdminResponseDTO>().fromPage(adminResponseDTOs);
     }
 
-    @Tag(name = "Feira - Admin")
+    @Tag(name = "FeiraAdmin")
+    @Transactional
     @PostMapping("feira/{feiraId}/admins/{adminId}")
     public ResponseEntityDto<Void> addAdminToFeira(@PathVariable Long feiraId, @PathVariable Long adminId) {
         feiraService.addAdminToFeira(feiraId, adminId);
         return new ResponseEntityDto<>();
     }
 
-    @Tag(name = "Feira - Admin")
+    @Tag(name = "FeiraAdmin")
+    @Transactional
     @DeleteMapping("feira/{feiraId}/admins/{adminId}")
     public ResponseEntityDto<Void> removeAdminFromFeira(@PathVariable Long feiraId, @PathVariable Long adminId) {
         feiraService.removeAdminFromFeira(feiraId, adminId);
         return new ResponseEntityDto<>();
     }
 
-    @Tag(name = "Feira - Evento")
+    @Tag(name = "FeiraEvento")
+    @Transactional
     @GetMapping("/{feiraId}/eventos")
     public PaginatedResponseDto<EventoBaseDTO> getEventosByFeira(@PathVariable Long feiraId, Pageable pageable) {
         Page<Evento> eventosPage = feiraService.findEventosByFeiraId(feiraId, pageable);
@@ -95,14 +105,16 @@ public class FeiraController {
         return new PaginatedResponseDto<EventoBaseDTO>().fromPage(eventoResponseDTOs);
     }
 
-    @Tag(name = "Feira - Evento")
+    @Tag(name = "FeiraEvento")
+    @Transactional
     @PostMapping("/{feiraId}/eventos/{eventoId}")
     public ResponseEntityDto<Void> addEventoToFeira(@PathVariable Long feiraId, @PathVariable Long eventoId) {
         feiraService.addEventoToFeira(feiraId, eventoId);
         return new ResponseEntityDto<>();
     }
 
-    @Tag(name = "Feira - Evento")
+    @Tag(name = "FeiraEvento")
+    @Transactional
     @DeleteMapping("/{feiraId}/eventos/{eventoId}")
     public ResponseEntityDto<Void> removeEventoFromFeira(@PathVariable Long feiraId, @PathVariable Long eventoId) {
         feiraService.removeEventoFromFeira(feiraId, eventoId);

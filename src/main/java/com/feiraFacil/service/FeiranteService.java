@@ -40,7 +40,6 @@ public class FeiranteService {
     public void deleteById(Long id) {
         feiranteRepository.delete(findById(id));
     }
-
     public Feirante toFeirante(FeiranteRequestDTO feiranteRequestDTO) {
         Feirante feirante = new Feirante();
         feirante.setNomeFeirante(feiranteRequestDTO.getNomeFeirante());

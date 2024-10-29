@@ -8,6 +8,7 @@ import com.feiraFacil.model.Feirante;
 import com.feiraFacil.service.FeiranteService;
 import com.feiraFacil.utils.PageMapperUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ public class FeiranteController {
     @Autowired
     FeiranteService feiranteService;
 
+    @Transactional
     @GetMapping
     public PaginatedResponseDto<FeiranteBaseDTO> getEntity(Pageable pageable) {
         Page<Feirante> feirantesPage = feiranteService.findAll(pageable);
@@ -29,6 +31,7 @@ public class FeiranteController {
         return new PaginatedResponseDto<FeiranteBaseDTO>().fromPage(feiranteDTOPage);
     }
 
+    @Transactional
     @PostMapping
     public ResponseEntityDto<FeiranteBaseDTO> createEntity(@RequestBody FeiranteRequestDTO feiranteRequestDTO) {
         Feirante feirante = feiranteRequestDTO.toEntity();
@@ -38,6 +41,7 @@ public class FeiranteController {
         return new ResponseEntityDto<FeiranteBaseDTO>().setContent(feiranteBaseDTO);
     }
 
+    @Transactional
     @GetMapping("feirante/{id}")
     public ResponseEntityDto<FeiranteBaseDTO> getEntity(@PathVariable Long id) {
         Feirante feirante = feiranteService.findById(id);
@@ -45,6 +49,7 @@ public class FeiranteController {
         return new ResponseEntityDto<FeiranteBaseDTO>().setContent(FeiranteBaseDTO);
     }
 
+    @Transactional
     @PutMapping("feirante")
     public ResponseEntityDto<FeiranteBaseDTO> putEntity(@RequestBody FeiranteRequestDTO feiranteRequestDTO) {
         Feirante feirante = feiranteRequestDTO.toEntity();
@@ -53,6 +58,7 @@ public class FeiranteController {
         return new ResponseEntityDto<FeiranteBaseDTO>().setContent(feiranteBaseDTO);
     }
 
+    @Transactional
     @DeleteMapping("feirante/{id}")
     public ResponseEntityDto<Void> deleteEntity(@PathVariable Long id) {
         feiranteService.deleteById(id);
