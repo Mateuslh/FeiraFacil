@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.TituloEleitoral;
 
 import java.util.List;
 
@@ -22,8 +24,12 @@ public class Feirante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String nomeFeirante;
+    @NotBlank
     private String nomeEmpresa;
+    @CNPJ
+    @NotBlank
     private String cnpj;
     private String telefone;
 

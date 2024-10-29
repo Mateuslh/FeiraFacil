@@ -25,7 +25,10 @@ public class Admin implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String usuario;
+
+    @NotBlank
     private String senha;
 
     @NotBlank
