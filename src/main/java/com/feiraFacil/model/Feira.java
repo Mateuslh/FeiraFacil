@@ -23,7 +23,6 @@ public class Feira {
 
     private String nome;
     private String local;
-    private Date data;
     private String descricao;
 
     @OneToOne(fetch = FetchType.LAZY)
