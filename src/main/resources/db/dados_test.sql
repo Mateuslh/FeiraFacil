@@ -21,8 +21,8 @@ VALUES ('2024-11-01', 1),
        ('2024-11-04', 2);
 
 INSERT INTO public.feirante (cnpj, email, nome_empresa, nome_feirante, telefone, feira_id)
-VALUES ('78.635.198/0001-77', 'feirinha1@gmail.com', 'feirinha 1 ltda', 'feirinha 1', '(48) 991485139', 1),
-       ('78.635.198/0001-77', 'feirinha2@gmail.com', 'feirinha 2 ltda', 'feirinha 2', '(48) 991485139', 2);
+VALUES ('78635198000177', 'feirinha1@gmail.com', 'feirinha 1 ltda', 'feirinha 1', '(48) 991485139', 1),
+       ('78635198000177', 'feirinha2@gmail.com', 'feirinha 2 ltda', 'feirinha 2', '(48) 991485139', 2);
 
 
 INSERT INTO public.feirante_categoria (feirante_id, categoria_id)
