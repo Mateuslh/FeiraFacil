@@ -8,9 +8,9 @@ INSERT INTO public.categoria (descricao)
 VALUES ('papelaria');
 
 INSERT INTO public.feira (descricao, "local", nome)
-VALUES ('descricao_2ec9301bbff4', 'local_e52d4aed33fc', 'nome_fa09eef278cc'),
-       ('descricao_2ec9301bbff4', 'local_e52d4aed33fc', 'nome_fa09eef278cc'),
-       ('descricao_2ec9301bbff4', 'local_e52d4aed33fc', 'nome_fa09eef278cc');
+VALUES ('descricao1', 'local1', 'feira1'),
+       ('descricao2', 'local2', 'feira2'),
+       ('descricao3', 'local3', 'feira3');
 
 INSERT INTO public.feira_admin (feira_id, admin_id)
 VALUES (1, 1),
