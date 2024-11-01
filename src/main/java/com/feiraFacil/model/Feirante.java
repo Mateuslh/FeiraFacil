@@ -54,7 +54,11 @@ public class Feirante {
     @JoinColumn(name = "feira_id")
     private Feira feira;
 
-//    @JsonProperty("imagemId")
+    public void setCnpj(@CNPJ @NotBlank String cnpj) {
+        this.cnpj = cnpj.replaceAll("\\D", "");
+    }
+
+    //    @JsonProperty("imagemId")
 //    public Long getImagemId() {
 //        return imagem != null ? imagem.getId() : null;
 //    }
