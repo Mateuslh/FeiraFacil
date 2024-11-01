@@ -7,8 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Long>, PagingAndSortingRepository<Evento, Long> {
     List<Evento> findAllByDataAfter(LocalDateTime data);
+
+    Optional<Evento> findByFeiraIdAndId(Long feiraId, Long id);
+
 }

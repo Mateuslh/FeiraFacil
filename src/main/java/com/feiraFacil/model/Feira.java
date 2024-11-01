@@ -1,15 +1,13 @@
 package com.feiraFacil.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -29,10 +27,11 @@ public class Feira {
     private String local;
     private String descricao;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "imagem_id")
-    @JsonProperty("imagemId")
-    private Imagem imagem;
+//    @Getter(AccessLevel.NONE)
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "imagem_id")
+//    @JsonProperty("imagemId")
+//    private Imagem imagem;
 
     @OneToMany(mappedBy = "feira", fetch = FetchType.LAZY)
     private List<Feirante> feirantes;
@@ -43,13 +42,13 @@ public class Feira {
             joinColumns = @JoinColumn(name = "feira_id"),
             inverseJoinColumns = @JoinColumn(name = "admin_id")
     )
-    private List<Admin> admins;
+    private List<Admin> admins = new ArrayList<>();
 
     @OneToMany(mappedBy = "feira", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Evento> eventos;
 
-    @JsonProperty("imagemId")
-    public Long getImagemId() {
-        return imagem != null ? imagem.getId() : null;
-    }
+//    @JsonProperty("imagemId")
+//    public Long getImagemId() {
+//        return imagem != null ? imagem.getId() : null;
+//    }
 }

@@ -3,7 +3,6 @@ package com.feiraFacil.service;
 import com.feiraFacil.dto.createEntity.FeiranteRequestDTO;
 import com.feiraFacil.exception.EntidadeNaoEncontradaException;
 import com.feiraFacil.model.Feirante;
-import com.feiraFacil.model.Imagem;
 import com.feiraFacil.repository.FeiranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +39,7 @@ public class FeiranteService {
     public void deleteById(Long id) {
         feiranteRepository.delete(findById(id));
     }
+
     public Feirante toFeirante(FeiranteRequestDTO feiranteRequestDTO) {
         Feirante feirante = new Feirante();
         feirante.setNomeFeirante(feiranteRequestDTO.getNomeFeirante());
@@ -47,8 +47,8 @@ public class FeiranteService {
         feirante.setCnpj(feiranteRequestDTO.getCnpj());
         feirante.setEmail(feiranteRequestDTO.getEmail());
         feirante.setTelefone(feiranteRequestDTO.getTelefone());
-        Imagem imagem = imagemService.findById(feiranteRequestDTO.getFeiraId());
-        feirante.setImagem(imagem);
+//        Imagem imagem = imagemService.findById(feiranteRequestDTO.getImagemId());
+//        feirante.setImagem(imagem);
         return feirante;
     }
 }

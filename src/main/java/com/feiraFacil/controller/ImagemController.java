@@ -4,10 +4,6 @@ import com.feiraFacil.dto.ResponseEntityDto;
 import com.feiraFacil.dto.baseEntity.ImagemResponseDTO;
 import com.feiraFacil.model.Imagem;
 import com.feiraFacil.service.ImagemService;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +39,7 @@ public class ImagemController {
                 .contentType(MediaType.parseMediaType(imagem.getTipo()))
                 .body(imagem.getDados());
     }
+
     @Transactional
     @DeleteMapping("/imagem/{id}")
     public ResponseEntityDto<Void> delete(@PathVariable Long id) {

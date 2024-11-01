@@ -29,7 +29,7 @@ public class AdminController {
     }
 
     @Transactional
-    @PutMapping("/admin")
+    @PutMapping()
     public ResponseEntityDto<AdminResponseDTO> updateEntity(@Valid @RequestBody AdminRequestDTO adminDTO) {
         Admin admin = adminDTO.toEntity();
         return new ResponseEntityDto<>().setContent(adminService.save(admin));

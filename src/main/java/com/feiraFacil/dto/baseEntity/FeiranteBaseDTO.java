@@ -13,7 +13,7 @@ public class FeiranteBaseDTO extends AbstractDTO<Feirante, FeiranteBaseDTO> {
     private String nomeEmpresa;
     private String cnpj;
     private String telefone;
-    private Long imagemId;
+    //    private Long imagemId;
     private String email;
     private Long feiraId;
 

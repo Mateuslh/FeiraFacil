@@ -24,10 +24,9 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(authz -> authz
+                        .requestMatchers(HttpMethod.GET, "/api/feiras/feira/*/admins/**").authenticated()
 
-                        .requestMatchers(HttpMethod.GET,"/api/feiras/feira/*/admins/**").authenticated()
-
-                        .requestMatchers(HttpMethod.POST, "/api/admins","/api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/admins", "/api/auth/login").permitAll()
 
                         .requestMatchers(HttpMethod.GET,
                                 "/v3/**",

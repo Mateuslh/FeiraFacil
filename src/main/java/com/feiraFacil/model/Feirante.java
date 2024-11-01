@@ -1,6 +1,5 @@
 package com.feiraFacil.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.TituloEleitoral;
 
 import java.util.List;
 
@@ -41,10 +39,10 @@ public class Feirante {
     )
     private List<Categoria> categorias;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "imagem_id")
-    @JsonProperty("imagemId")
-    private Imagem imagem;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "imagem_id")
+//    @JsonProperty("imagemId")
+//    private Imagem imagem;
 
     @Email(message = "{email.invalid}")
     @NotBlank(message = "{email.blank}")
@@ -56,8 +54,8 @@ public class Feirante {
     @JoinColumn(name = "feira_id")
     private Feira feira;
 
-    @JsonProperty("imagemId")
-    public Long getImagemId() {
-        return imagem != null ? imagem.getId() : null;
-    }
+//    @JsonProperty("imagemId")
+//    public Long getImagemId() {
+//        return imagem != null ? imagem.getId() : null;
+//    }
 }

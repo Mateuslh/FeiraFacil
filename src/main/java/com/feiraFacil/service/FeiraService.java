@@ -82,23 +82,5 @@ public class FeiraService {
         return new PageImpl<>(feira.getEventos(), pageable, feira.getAdmins().size());
     }
 
-    public void addEventoToFeira(Long feiraId, Long eventoId) {
-        Feira feira = feiraRepository.findById(feiraId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(Feira.class));
-        Evento evento = eventoRepository.findById(eventoId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(Admin.class));
-        feira.getEventos().remove(evento);
-        feiraRepository.save(feira);
-    }
-
-    public void removeEventoFromFeira(Long feiraId, Long eventoId) {
-        Feira feira = feiraRepository.findById(feiraId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(Feira.class));
-        Evento evento = eventoRepository.findById(eventoId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(Admin.class));
-        feira.getEventos().remove(evento);
-        feiraRepository.save(feira);
-    }
-
 }
 

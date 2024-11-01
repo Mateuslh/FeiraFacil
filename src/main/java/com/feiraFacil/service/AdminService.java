@@ -28,6 +28,10 @@ public class AdminService {
         return adminRepository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException(Admin.class));
     }
 
+    public Admin findByUsername(String username) {
+        return adminRepository.findByUsuario(username).orElseThrow(() -> new EntidadeNaoEncontradaException(Admin.class));
+    }
+
     public AdminResponseDTO save(Admin admin) {
         admin.setSenha(passwordEncoder.encode(admin.getSenha()));
         return toAdminResponseDTO(adminRepository.save(admin));

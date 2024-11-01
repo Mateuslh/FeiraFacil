@@ -18,11 +18,14 @@ public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotNull
     private LocalDate data;
-
     @ManyToOne
     @JoinColumn(name = "feira_id", nullable = false)
     private Feira feira;
+
+    public Evento(LocalDate data, Feira feira) {
+        this.data = data;
+        this.feira = feira;
+    }
 }
