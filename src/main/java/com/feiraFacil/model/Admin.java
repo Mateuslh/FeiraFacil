@@ -26,6 +26,7 @@ public class Admin implements UserDetails {
     private Long id;
 
     @NotBlank
+    @Column(unique = true)
     private String usuario;
 
     @NotBlank
