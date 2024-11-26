@@ -70,7 +70,7 @@ public class FeiraController {
 
     @Tag(name = "Feira")
     @Transactional
-    @PutMapping("feira")
+    @PutMapping("/feira")
     public ResponseEntityDto<FeiraBaseDTO> updateEntity(@RequestBody FeiraBaseDTO feiraBaseDTO) {
         Feira feira = feiraBaseDTO.toEntity();
         Feira feiraResult = feiraService.update(feira);

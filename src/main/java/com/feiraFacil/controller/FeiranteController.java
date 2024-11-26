@@ -51,7 +51,7 @@ public class FeiranteController {
 
     @Transactional
     @PutMapping("feirante")
-    public ResponseEntityDto<FeiranteBaseDTO> putEntity(@RequestBody FeiranteRequestDTO feiranteRequestDTO) {
+    public ResponseEntityDto<FeiranteBaseDTO> putEntity(@RequestBody FeiranteBaseDTO feiranteRequestDTO) {
         Feirante feirante = feiranteRequestDTO.toEntity();
         Feirante feiranteResult = feiranteService.save(feirante);
         FeiranteBaseDTO feiranteBaseDTO = new FeiranteBaseDTO(feiranteResult);
