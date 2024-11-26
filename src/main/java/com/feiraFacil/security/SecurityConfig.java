@@ -25,10 +25,9 @@ public class SecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers(HttpMethod.GET, "/api/feiras/feira/*/admins/**").authenticated()
-
-                        .requestMatchers(HttpMethod.POST, "/api/admins", "/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/feiras/feira/*/admins/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/admins", "/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET,
                                 "/v3/**",
                                 "/swagger-ui/**",
